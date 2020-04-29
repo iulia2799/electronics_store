@@ -37,6 +37,14 @@ public class MainMenu implements ActionListener
             SignUp signup = new SignUp();
             signup.performAdmin();
            mainFrame.setVisible(false);
+
         }
+        else
+            if(actionEvent.getSource()==signIn)
+            {
+                SignIn signin = new SignIn();
+                signin.performSignIn();
+                mainFrame.setVisible(false);
+            }
     }
 }
