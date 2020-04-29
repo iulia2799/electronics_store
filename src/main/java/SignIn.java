@@ -37,13 +37,25 @@ public class SignIn implements ActionListener{
         ///
         connectSIButton.setBounds(10,150,100,35);
         signInPanel.add(connectSIButton);
+        connectSIButton.addActionListener(this);
         ///
         backSIButton.setBounds(150,150,100,35);
         signInPanel.add(backSIButton);
+        backSIButton.addActionListener(this);
     }
 
 
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent actionEvent) {
+        if(actionEvent.getSource()==connectSIButton)
+        {
+            JOptionPane.showMessageDialog(signInFrame,"YOU GOT PRANKED!");
+        }
+        if(actionEvent.getSource()==backSIButton)
+        {
+            MainMenu sm = new MainMenu();
+            sm.performMain();
+            signInFrame.setVisible(false);
+        }
 
     }
 }
