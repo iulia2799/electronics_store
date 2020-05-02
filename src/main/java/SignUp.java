@@ -1,6 +1,3 @@
-import com.sun.org.apache.xml.internal.security.utils.JDKXPathAPI;
-
-import javax.print.attribute.standard.JobOriginatingUserName;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +14,6 @@ public class SignUp implements ActionListener
     protected JButton connectAdminButton = new JButton("Connect Admin");
     //
     protected JButton backButton = new JButton("Back");
-    ///
     ///
     ///
     protected JLabel usernameSignUpLabel = new JLabel("username");
