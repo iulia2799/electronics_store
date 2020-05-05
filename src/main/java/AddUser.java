@@ -1,35 +1,41 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
+import org.json.simple.parser.ParseException;
 import java.io.*;
-import java.text.ParseException;
-
 public class AddUser {
-    public void addUser(String username , String password , String typeOfAccount) throws FileNotFoundException {
-        JSONParser parser = new JSONParser();
-        Reader read = new FileReader("users.json");
+    public void  addUser(String username, String password, String typeOfAccount){
+        JSONObject users = new JSONObject();
+         JSONParser parser = new JSONParser();
+        Object p;
+        JSONArray arrayToParse = new JSONArray();
         try {
-            JSONArray arrayToParse = (JSONArray) parser.parse(read);
-        }catch(IOException e)
+            FileReader readFile= new FileReader("users.json");
+            BufferedReader read = new BufferedReader(readFile);
+                 p = parser.parse(read);
+                if(p instanceof  JSONArray)
+                {
+                     arrayToParse =(JSONArray)p;
+                }
+
+        } catch(IOException e)
         {
             e.printStackTrace();
-        } catch (org.json.simple.parser.ParseException e) {
-            e.printStackTrace();
-        }
-        JSONObject obj = new JSONObject();
-        obj.put("username:",username);
-        obj.put("password:",password);
-        obj.put("typeOfAccount:",typeOfAccount);
-        JSONArray listOfelements = new JSONArray();
-        listOfelements.add(obj);
-        try
-        {
-            FileWriter file = new FileWriter("users.json");
-            file.write(listOfelements.toJSONString());
-        }catch (IOException e)
-        {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
+        users.put("username:", username);
+        users.put("password:", password);
+        users.put("typeOfAccount:", typeOfAccount);
+        arrayToParse.add(users);
+            try
+            {
+                File file  = new File("users.json");
+                FileWriter fisier = new FileWriter(file.getAbsoluteFile());
+                fisier.write(arrayToParse.toJSONString());
+                fisier.close();
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }

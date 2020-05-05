@@ -18,10 +18,12 @@ public class SignIn implements ActionListener{
     ///
     protected JButton backSIButton = new JButton("Back");
     ///
+    protected JCheckBox employeeCheckBox = new JCheckBox("Employee");
+    protected JCheckBox managerCheckBox = new JCheckBox("Manager");
     public void performSignIn(){
         signInFrame.setVisible(true);
         signInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        signInFrame.setSize(600,600);
+        signInFrame.setSize(500,350);
         signInFrame.add(signInPanel);
         signInPanel.setLayout(null);
         ///
@@ -35,11 +37,17 @@ public class SignIn implements ActionListener{
         signInPanel.add(passwordSILabel);
         signInPanel.add(passwordSIField);
         ///
-        connectSIButton.setBounds(10,150,100,35);
+        //Employee check box
+        employeeCheckBox.setBounds(10,150,100,30);
+        signInPanel.add(employeeCheckBox);
+        //Manager Check box
+        managerCheckBox.setBounds(130,150,100,30);
+        signInPanel.add(managerCheckBox);
+        connectSIButton.setBounds(10,200,100,35);
         signInPanel.add(connectSIButton);
         connectSIButton.addActionListener(this);
         ///
-        backSIButton.setBounds(150,150,100,35);
+        backSIButton.setBounds(150,200,100,35);
         signInPanel.add(backSIButton);
         backSIButton.addActionListener(this);
     }
