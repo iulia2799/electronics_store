@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 public class SignUp implements ActionListener
 {
@@ -138,7 +139,12 @@ public class SignUp implements ActionListener
                 }
                 user += usernameTextSU.getText();
                 AddUser userObj = new AddUser();
-                userObj.addUser(user, pass, type);
+                Encryption e = new Encryption();
+                try {
+                    userObj.addUser(user,e.encodePassword(pass), type);
+                } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                    noSuchAlgorithmException.printStackTrace();
+                }
                 usernameTextSU.setText(null);
                 passwordTextSU.setText(null);
             }

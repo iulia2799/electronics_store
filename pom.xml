@@ -7,6 +7,18 @@
     <groupId>org.electronic</groupId>
     <artifactId>Proiect FIS 2020</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
 
         <dependency>
@@ -20,6 +32,9 @@
         <artifactId>json-simple</artifactId>
         <version>1.1.1</version>
         </dependency>
-    </dependencies>
 
+    </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 </project>
