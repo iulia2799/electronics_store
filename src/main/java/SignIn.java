@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
 
 
 public class SignIn implements ActionListener{
@@ -55,8 +56,42 @@ public class SignIn implements ActionListener{
 
     public void actionPerformed(ActionEvent actionEvent) {
         if(actionEvent.getSource()==connectSIButton)
-        {
-            JOptionPane.showMessageDialog(signInFrame,"YOU GOT PRANKED!");
+        {    String pass="";
+             String user="";
+             String type="";
+             if(employeeCheckBox.isSelected())
+             {
+                 type+="employee";
+             }
+             else if(managerCheckBox.isSelected())
+             {
+                 type+="manager";
+             }
+             char[] passformat =passwordSIField.getPassword();
+             for(char i : passformat)
+             {
+                 pass+=i;
+             }
+             user=usernameSITextField.getText();
+
+             AddUser userSearch = new AddUser();
+             Encryption encryption = new Encryption();
+
+             try{
+                 userSearch.readJSON(user,encryption.encodePassword(pass),type);
+             }catch (NoSuchAlgorithmException ex){
+                 ex.printStackTrace();
+             }
+             if(userSearch.isUsername && userSearch.isPassword)
+             {
+                 JOptionPane.showMessageDialog(signInFrame,"LOGGED IN");
+             }
+             else
+             {
+                 JOptionPane.showMessageDialog(signInFrame,"Username sau parola sau tip incorect");
+             }
+
+            //JOptionPane.showMessageDialog(signInFrame,"YOU GOT PRANKED!");
         }
         if(actionEvent.getSource()==backSIButton)
         {
