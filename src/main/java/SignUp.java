@@ -24,15 +24,12 @@ public class SignUp implements ActionListener
     ///
     protected JLabel usernameSignUpLabel = new JLabel("username");
     protected JLabel passwordSignUpLabel = new JLabel("password");
-    protected JLabel typeofAccount = new JLabel("Type of account");
     ///
     protected JTextField usernameTextSU = new JTextField();
     protected JPasswordField passwordTextSU = new JPasswordField();
-    protected JTextField typeofAccountField=  new JTextField();
-    protected JButton createAccount  = new JButton("Create account");
+    protected JButton createAccount= new JButton("Create account");
     protected JCheckBox employeeCheckBox = new JCheckBox("Employee");
     protected JCheckBox managerCheckBox = new JCheckBox("Manager");
-
     public void performAdmin() {
         adminFrame.setSize(300, 300);
         adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,41 +118,51 @@ public class SignUp implements ActionListener
             signUpFrame.setVisible(false);
         }
         if(actionEvent.getSource()==createAccount) {
-            if (employeeCheckBox.isSelected() ^ managerCheckBox.isSelected()) {
-                String pass = "";
-                String user = "";
-                String type = "";
-                    if(employeeCheckBox.isSelected())
-                    {
-                        type+="employee";
+            String pass = "";
+            String user = "";
+            String type = "";
+            if (employeeCheckBox.isSelected()) {
+                type += "employee";
+            } else if (managerCheckBox.isSelected()) {
+                type += "manager";
+            }
+            char[] passformat = passwordTextSU.getPassword();
+            for (char i : passformat) {
+                pass += i;
+            }
+            user += usernameTextSU.getText();
+            //////
+            AddUser userObj = new AddUser();
+            Encryption e = new Encryption();
+            try {
+                userObj.readJSON(user,e.encodePassword(pass), type);
+            } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                noSuchAlgorithmException.printStackTrace();
+            }
+            ////
+            if (!userObj.isUsername && !userObj.isPassword) {
+                if(employeeCheckBox.isSelected() ^ managerCheckBox.isSelected()) {
+                    try {
+                        userObj.addUser(user, e.encodePassword(pass), type);
+                    } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                        noSuchAlgorithmException.printStackTrace();
                     }
-                    else if(managerCheckBox.isSelected())
-                    {
-                        type+="manager";
-                    }
-                char[] passformat = passwordTextSU.getPassword();
-                for (char i : passformat) {
-                    pass += i;
                 }
-                user += usernameTextSU.getText();
-                AddUser userObj = new AddUser();
-                Encryption e = new Encryption();
-                try {
-                    userObj.addUser(user,e.encodePassword(pass), type);
-                } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-                    noSuchAlgorithmException.printStackTrace();
-                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(signUpFrame, "Cont existent ,incercati alt username sau parola!");
                 usernameTextSU.setText(null);
                 passwordTextSU.setText(null);
             }
-            else if(employeeCheckBox.isSelected() && managerCheckBox.isSelected())
-            {
-                JOptionPane.showMessageDialog(signUpFrame,"Invalida optiune pentru tipul de cont");
+            ////
+            if (employeeCheckBox.isSelected() && managerCheckBox.isSelected()) {
+                JOptionPane.showMessageDialog(signUpFrame, "Invalida optiune pentru tipul de cont");
             }
-            else if(!employeeCheckBox.isSelected() && !managerCheckBox.isSelected())
-            {
-                JOptionPane.showMessageDialog(signUpFrame,"Alegeti tipul contului");
+            if (!employeeCheckBox.isSelected() && !managerCheckBox.isSelected()) {
+                JOptionPane.showMessageDialog(signUpFrame, "Alegeti tipul contului");
             }
+            ////////
         }
     }
 }
