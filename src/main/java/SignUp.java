@@ -121,7 +121,7 @@ public class SignUp implements ActionListener
             signUpFrame.setVisible(false);
         }
         if(actionEvent.getSource()==createAccount) {
-            if (!(employeeCheckBox.isSelected() && managerCheckBox.isSelected())) {
+            if (employeeCheckBox.isSelected() ^ managerCheckBox.isSelected()) {
                 String pass = "";
                 String user = "";
                 String type = "";
