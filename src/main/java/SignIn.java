@@ -84,7 +84,17 @@ public class SignIn implements ActionListener{
              }
              if(userSearch.isUsername && userSearch.isPassword)
              {
-                 JOptionPane.showMessageDialog(signInFrame,"LOGGED IN");
+                 //JOptionPane.showMessageDialog(signInFrame,"LOGGED IN");
+                 if(type.equals("employee"))
+                 {
+                     Employee employee = new Employee();
+                     employee.performEmployee();
+                     signInFrame.setVisible(false);
+                 }
+                 if(type.equals("manager"))
+                 {
+                     JOptionPane.showMessageDialog(signInFrame,"logged in as manager");
+                 }
              }
              else
              {
