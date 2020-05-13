@@ -93,7 +93,9 @@ public class SignIn implements ActionListener{
                  }
                  if(type.equals("manager"))
                  {
-                     JOptionPane.showMessageDialog(signInFrame,"logged in as manager");
+                     Manager manager = new Manager();
+                     manager.performManager();
+                     signInFrame.setVisible(false);
                  }
              }
              else

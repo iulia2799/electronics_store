@@ -7,13 +7,9 @@ import java.security.NoSuchAlgorithmException;
 public class Employee implements ActionListener {
     protected JFrame employeeFrame = new JFrame();
     protected JPanel employeePanel = new JPanel();
-
     protected JButton viewProductsButton = new JButton("View Products");
-
     protected JButton viewTasksButton = new JButton("View Tasks");
-
     protected JButton backButton = new JButton("Back");
-
     public void performEmployee()
     {
         employeeFrame.setVisible(true);
