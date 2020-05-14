@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+
+import static java.awt.Adjustable.VERTICAL;
+
 public class Manager implements ActionListener
 {
     protected JFrame managerFrame = new JFrame();
@@ -118,20 +123,32 @@ public class Manager implements ActionListener
     }
     //Show inventory
     String inventory="";
-    protected JFrame showInventoryFrame = new JFrame();
-    protected JPanel inventoryPanel = new JPanel();
-    protected JTextArea inventoryText = new JTextArea();
+
+   // protected JPanel inventoryPanel = new JPanel();
 
     public void performShowInventory()
     {
+        final JFrame showInventoryFrame = new JFrame();
+        final JTextArea inventoryLabel = new JTextArea();
+        JScrollBar heightBar = new JScrollBar(JScrollBar.HORIZONTAL,30,20,0,500);
+        JScrollBar verticalBar =new JScrollBar(JScrollBar.VERTICAL,30,40,0,500);
+        class AdjustmentLis implements AdjustmentListener
+        {
+            @Override
+            public void adjustmentValueChanged(AdjustmentEvent adjustmentEvent) {
+                inventoryLabel.setText(inventory+"\n");
+                showInventoryFrame.repaint();
+            }
+        }
+        heightBar.addAdjustmentListener(new AdjustmentLis());
+        verticalBar.addAdjustmentListener(new AdjustmentLis());
         showInventoryFrame.setVisible(true);
         showInventoryFrame.setSize(400,400);
-        showInventoryFrame.add(inventoryPanel);
-        inventoryPanel.setLayout(null);
+        showInventoryFrame.getContentPane().add(inventoryLabel);
+        showInventoryFrame.getContentPane().add(heightBar,BorderLayout.SOUTH);
+        showInventoryFrame.getContentPane().add(verticalBar,BorderLayout.EAST);
         showInventoryFrame.setResizable(true);
-        inventoryText.setBounds(0,0,1000,1000);
-        inventoryPanel.add(inventoryText);
-        inventoryText.setText(inventory);
+
     }
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
