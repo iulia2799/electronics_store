@@ -129,24 +129,34 @@ public class Manager implements ActionListener
     public void performShowInventory()
     {
         final JFrame showInventoryFrame = new JFrame();
-        final JTextArea inventoryLabel = new JTextArea();
-        JScrollBar heightBar = new JScrollBar(JScrollBar.HORIZONTAL,30,20,0,500);
-        JScrollBar verticalBar =new JScrollBar(JScrollBar.VERTICAL,30,40,0,500);
-        class AdjustmentLis implements AdjustmentListener
+        final JTextArea inventoryLabel = new JTextArea(10,20);
+        JScrollPane scroll = new JScrollPane(inventoryLabel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        //JScrollBar heightBar = new JScrollBar(JScrollBar.HORIZONTAL,30,20,0,500);
+       // JScrollBar verticalBar =new JScrollBar(JScrollBar.VERTICAL,30,40,0,500);
+        class AdjustmentLis implements AdjustmentListener  //not needed
         {
             @Override
             public void adjustmentValueChanged(AdjustmentEvent adjustmentEvent) {
                 inventoryLabel.setText(inventory+"\n");
                 showInventoryFrame.repaint();
+
             }
         }
-        heightBar.addAdjustmentListener(new AdjustmentLis());
-        verticalBar.addAdjustmentListener(new AdjustmentLis());
+       // heightBar.addAdjustmentListener(new AdjustmentLis());
+       // verticalBar.addAdjustmentListener(new AdjustmentLis());
+
         showInventoryFrame.setVisible(true);
         showInventoryFrame.setSize(400,400);
-        showInventoryFrame.getContentPane().add(inventoryLabel);
-        showInventoryFrame.getContentPane().add(heightBar,BorderLayout.SOUTH);
-        showInventoryFrame.getContentPane().add(verticalBar,BorderLayout.EAST);
+
+        showInventoryFrame.add(scroll);
+
+        inventoryLabel.setLineWrap(true);
+        inventoryLabel.setWrapStyleWord(true);
+        inventoryLabel.setText(inventory+"\n");
+        showInventoryFrame.repaint();
+       // showInventoryFrame.getContentPane().add(inventoryLabel);
+      //  showInventoryFrame.getContentPane().add(heightBar,BorderLayout.SOUTH);
+       // showInventoryFrame.getContentPane().add(verticalBar,BorderLayout.EAST);
         showInventoryFrame.setResizable(true);
 
     }
