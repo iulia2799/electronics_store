@@ -87,8 +87,8 @@ public class SignIn implements ActionListener{
                  //JOptionPane.showMessageDialog(signInFrame,"LOGGED IN");
                  if(type.equals("employee"))
                  {
-                     Employee employee = new Employee();
-                     employee.performEmployee();
+                     Employee employee = new Employee(user);
+                     employee.performEmployee(user);
                      signInFrame.setVisible(false);
                  }
                  if(type.equals("manager"))

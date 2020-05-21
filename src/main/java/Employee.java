@@ -1,16 +1,80 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
-public class Employee implements ActionListener {
+public class Employee implements ActionListener{
     protected JFrame employeeFrame = new JFrame();
     protected JPanel employeePanel = new JPanel();
     protected JButton viewProductsButton = new JButton("View Products");
     protected JButton viewTasksButton = new JButton("View Tasks");
     protected JButton backButton = new JButton("Back");
-    public void performEmployee()
+    String username="";
+    String products ="";
+    public Employee(String username)
+    {
+        this.username = username;
+    }
+    public void performViewProducts()
+    {
+        final JFrame viewProductsFrame = new JFrame();
+        final JTextArea viewProductsText = new JTextArea(10 ,20);
+        JScrollPane scroll = new JScrollPane(viewProductsText,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        viewProductsFrame.setVisible(true);
+        viewProductsFrame.setSize(400,400);
+        viewProductsFrame.add(scroll);
+
+        viewProductsText.setLineWrap(true);
+        viewProductsText.setWrapStyleWord(true);
+        viewProductsText.setText(products+"\n");
+        viewProductsFrame.repaint();
+        viewProductsFrame.setResizable(true);
+    }
+    String tasks="";
+
+    public void performViewTasks(String username)
+    {
+        final JFrame taskFrame = new JFrame();
+        final JPanel taskPanel = new JPanel();
+        //JScrollPane scrollTasks = new JScrollPane(taskPanel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        taskFrame.setVisible(true);
+        taskFrame.setSize(500,500);
+       // taskFrame.add(scrollTasks);
+        //taskFrame.add(taskPanel);
+        taskPanel.setSize(400,400);
+
+        AddTasks employee = new AddTasks();
+        tasks+=employee.viewTasks(username) + "\n";
+
+        TaskTabelModel model = new TaskTabelModel();
+        JTable table = new JTable(model);
+
+// Create a couple of columns
+       // model.addColumn("Task description");
+       // model.addColumn("Realized");
+
+// Append a row
+        model.addRow(new Object[]{1,tasks,false});
+
+
+        taskFrame.add(new JScrollPane(table));
+        //taskPanel.add(table);
+        //table.getCellEditor();
+
+
+
+        taskFrame.setResizable(true);
+
+    }
+
+    public void performEmployee(String username)
     {
         employeeFrame.setVisible(true);
         employeeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,11 +102,16 @@ public class Employee implements ActionListener {
     {
         if(action.getSource()==viewProductsButton)
         {
-            JOptionPane.showMessageDialog(employeeFrame,"YOU GOT PRANKED!");
+            //JOptionPane.showMessageDialog(employeeFrame,"YOU GOT PRANKED!");
+            AddProducts p = new AddProducts();
+            products+=p.readProducts();
+            performViewProducts();
         }
          if(action.getSource()==viewTasksButton)
         {
-            JOptionPane.showMessageDialog(employeeFrame,"YOU GOT PRANKED!");
+            //JOptionPane.showMessageDialog(employeeFrame,"YOU GOT PRANKED!");
+
+            performViewTasks(this.username);
         }
         if(action.getSource()==backButton)
         {

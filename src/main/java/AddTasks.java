@@ -70,4 +70,42 @@ public class AddTasks {
             e.printStackTrace();
         }
     }
+
+    public String viewTasks(String nameOfEmployee)
+    {
+        String tasks ="";
+
+        JSONParser parser = new JSONParser();
+        JSONObject compare = new JSONObject();
+        Object p;
+        JSONArray array = new JSONArray();
+
+        try
+        {
+            FileReader readFile= new FileReader("inventory.json");
+            BufferedReader read = new BufferedReader(readFile);
+            p=parser.parse(read);
+            if(p instanceof JSONArray) {
+                array = (JSONArray) p;
+            }
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+        } catch (IOException ioException){
+            ioException.printStackTrace();
+        }
+
+        Iterator<JSONObject> iterator = array.iterator();
+        while(iterator.hasNext()) {
+            JSONObject obj = iterator.next();
+            if(nameOfEmployee.equals(obj.get("NameOfEmployee")))
+            {
+               // tasks+=obj.get("tasksList:");
+                tasks+=obj.toString();
+            }
+            tasks+="\n";
+        }
+
+        return tasks;
+    }
+
 }
