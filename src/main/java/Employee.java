@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Employee implements ActionListener{
     protected JFrame employeeFrame = new JFrame();
@@ -36,7 +38,7 @@ public class Employee implements ActionListener{
         viewProductsFrame.repaint();
         viewProductsFrame.setResizable(true);
     }
-    String tasks="";
+   String tasks="";
 
     public void performViewTasks(String username)
     {
@@ -50,8 +52,7 @@ public class Employee implements ActionListener{
         //taskFrame.add(taskPanel);
         taskPanel.setSize(400,400);
 
-        AddTasks employee = new AddTasks();
-        tasks+=employee.viewTasks(username) + "\n";
+
 
         TaskTabelModel model = new TaskTabelModel();
         JTable table = new JTable(model);
@@ -61,7 +62,16 @@ public class Employee implements ActionListener{
        // model.addColumn("Realized");
 
 // Append a row
-        model.addRow(new Object[]{1,tasks,false});
+       String parts = tasks.replaceAll("[^A-Za-z .]",";");
+       String[] arrstr =parts.split("[;]+");
+       int i=1;
+       for( String it : arrstr){
+           if(!it.isEmpty())
+           { model.addRow(new Object[]{i,it, false});
+           i++;}
+       }
+
+
 
 
         taskFrame.add(new JScrollPane(table));
@@ -110,7 +120,8 @@ public class Employee implements ActionListener{
          if(action.getSource()==viewTasksButton)
         {
             //JOptionPane.showMessageDialog(employeeFrame,"YOU GOT PRANKED!");
-
+            AddTasks employee = new AddTasks();
+            tasks=employee.viewTasks(username);
             performViewTasks(this.username);
         }
         if(action.getSource()==backButton)

@@ -3,6 +3,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 public class AddTasks {
     public void  addTask(String nameOfEmployee, String task){
@@ -79,10 +80,9 @@ public class AddTasks {
         JSONObject compare = new JSONObject();
         Object p;
         JSONArray array = new JSONArray();
-
         try
         {
-            FileReader readFile= new FileReader("inventory.json");
+            FileReader readFile= new FileReader("tasks.json");
             BufferedReader read = new BufferedReader(readFile);
             p=parser.parse(read);
             if(p instanceof JSONArray) {
@@ -93,16 +93,16 @@ public class AddTasks {
         } catch (IOException ioException){
             ioException.printStackTrace();
         }
-
         Iterator<JSONObject> iterator = array.iterator();
         while(iterator.hasNext()) {
             JSONObject obj = iterator.next();
-            if(nameOfEmployee.equals(obj.get("NameOfEmployee")))
+            if(obj.get("nameOfEmployee").equals(nameOfEmployee))
             {
-               // tasks+=obj.get("tasksList:");
-                tasks+=obj.toString();
+
+                tasks+=obj.get("tasksList:");
             }
-            tasks+="\n";
+
+
         }
 
         return tasks;

@@ -31,6 +31,10 @@ public class TaskTabelModel extends DefaultTableModel {
     public void setValueAt(Object aValue, int row, int column) {
         if (aValue instanceof Boolean && column == 2) {
            // System.out.println(aValue);
+            if(aValue.equals(true))
+            {
+                System.out.println(aValue);
+            }
             Vector rowData = (Vector)getDataVector().get(row);
             rowData.set(2, (boolean)aValue);
             fireTableCellUpdated(row, column);
