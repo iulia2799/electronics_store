@@ -38,6 +38,7 @@ public class AddProducts {
     public void  addProduct(String nameOfProduct, int quantity, double price){
         JSONObject users = new JSONObject();
         JSONParser parser = new JSONParser();
+        int rebuildQuantity=0;
         Object p;
         JSONArray arrayToParse = new JSONArray();
         try {
@@ -54,10 +55,34 @@ public class AddProducts {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        Iterator<JSONObject> iterator = arrayToParse.iterator();
+        while(iterator.hasNext())
+        {
+            JSONObject obj = iterator.next();
+            if(obj.get("nameOfProduct").equals(nameOfProduct))
+            {
+                String quantity2 = obj.get("quantity").toString();
+                int quant = Integer.parseInt(quantity2);
+                rebuildQuantity+=quant;
+                arrayToParse.remove(obj);
+                break;
+            }
+        }
+        System.out.println("Cantitatea citita este : "+rebuildQuantity);
+        int finalquant;
+        if(rebuildQuantity!=0)
+        {
+            finalquant=rebuildQuantity+quantity;
+        }
+        else {
+            finalquant=quantity;
+        }
+        System.out.println("Cantitatea finala: "+finalquant);
         users.put("nameOfProduct",nameOfProduct);
-        users.put("quantity",quantity);
+        users.put("quantity", finalquant);
         users.put("price",price);
         arrayToParse.add(users);
+
         try
         {
             File file  = new File("inventory.json");
