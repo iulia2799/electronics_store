@@ -33,7 +33,8 @@ public class AddTasks {
             users.put("nameOfEmployee", nameOfEmployee);
             users.put("tasksList:", taskslist);
             arrayToParse.add(users);
-        }
+        }///////////
+
         else {
             Iterator<JSONObject> jObject = arrayToParse.iterator();
             while (jObject.hasNext()) {
