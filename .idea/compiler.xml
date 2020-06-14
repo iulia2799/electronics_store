@@ -9,8 +9,8 @@
         <module name="electronics_storeFinalAproximate" />
         <module name="electronics_store3" />
         <module name="electronics_storeWorkingVersion" />
-        <module name="Proiect FIS 2020" />
         <module name="electronics_store" />
+        <module name="Proiect FIS 2020" />
       </profile>
     </annotationProcessing>
   </component>
