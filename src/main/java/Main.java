@@ -1,4 +1,3 @@
-import javafx.scene.shape.Path;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +15,9 @@ public class Main {
         }
     }
         public static void main(String[] args) throws IOException, ParseException {
-            File from_inventory = new File("\\electronics_storeFinalAproximate\\inventory.json").getAbsoluteFile();
-            File from_task = new File("\\electronics_storeFinalAproximate\\tasks.json").getAbsoluteFile();
-            File from_users = new File("\\electronics_storeFinalAproximate\\users.json").getAbsoluteFile();
+            File from_inventory = new File("\\electronics_storeFinalAproximate").getAbsoluteFile();
+            File from_task = new File("\\electronics_storeFinalAproximate").getAbsoluteFile();
+            File from_users = new File("\\electronics_storeFinalAproximate").getAbsoluteFile();
             File dest = new File("\\electronics_storeFinalAproximate\\target");
 
             copyFile(from_inventory,dest);

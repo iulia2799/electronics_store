@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
@@ -15,9 +16,9 @@ public class SignIn implements ActionListener{
     protected JLabel passwordSILabel = new JLabel("Password:");
     protected JPasswordField passwordSIField = new JPasswordField();
     ///connect button
-    protected JButton connectSIButton = new JButton("Sign in");
+    protected JButton connectSIButton = new RoundButton("Sign in");
     ///
-    protected JButton backSIButton = new JButton("Back");
+    protected JButton backSIButton = new RoundButton("Back");
     ///
     protected JCheckBox employeeCheckBox = new JCheckBox("Employee");
     protected JCheckBox managerCheckBox = new JCheckBox("Manager");
@@ -26,7 +27,9 @@ public class SignIn implements ActionListener{
         signInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         signInFrame.setSize(500,350);
         signInFrame.add(signInPanel);
+        signInFrame.setLocationRelativeTo(null);
         signInPanel.setLayout(null);
+        signInPanel.setBackground(new Color(135, 72, 72));
         ///
         usernameSILabel.setBounds(10,20,140,35);
         usernameSITextField.setBounds(10,50,140,35);
@@ -40,15 +43,17 @@ public class SignIn implements ActionListener{
         ///
         //Employee check box
         employeeCheckBox.setBounds(10,150,100,30);
+        employeeCheckBox.setBackground(new Color(135 ,72 ,72));
         signInPanel.add(employeeCheckBox);
         //Manager Check box
         managerCheckBox.setBounds(130,150,100,30);
+        managerCheckBox.setBackground(new Color(135,72,72));
         signInPanel.add(managerCheckBox);
-        connectSIButton.setBounds(10,200,100,35);
+        connectSIButton.setBounds(10,200,100,55);
         signInPanel.add(connectSIButton);
         connectSIButton.addActionListener(this);
         ///
-        backSIButton.setBounds(150,200,100,35);
+        backSIButton.setBounds(150,200,100,55);
         signInPanel.add(backSIButton);
         backSIButton.addActionListener(this);
     }

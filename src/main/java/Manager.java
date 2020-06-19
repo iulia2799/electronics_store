@@ -22,23 +22,29 @@ public class Manager implements ActionListener
         managerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         managerFrame.setVisible(true);
         managerFrame.add(managerPanel);
+        managerFrame.setLocationRelativeTo(null);
         managerPanel.setLayout(null);
+        managerPanel.setBackground(new Color(135,72,72));
         //Perform panel
         showInventory.setBounds(110,25,150,35);
         managerPanel.add(showInventory);
         showInventory.addActionListener(this);
+        showInventory.setBackground(new Color(104,136,225));
         //
         addInInventory.setBounds(110,65,150,35);
         managerPanel.add(addInInventory);
         addInInventory.addActionListener(this);
+        addInInventory.setBackground(new Color(104,136,225));
         //
         addTasks.setBounds(110,105,150,35);
         addTasks.addActionListener(this);
+        addTasks.setBackground(new Color(104,136,225));
         managerPanel.add(addTasks);
         //
         signOut.setBounds(110,165,150,35);
         managerPanel.add(signOut);
         signOut.addActionListener(this);
+        signOut.setBackground(new Color(104,136,105));
     }
     //
     protected JFrame addProducsFrame = new JFrame();
@@ -58,6 +64,7 @@ public class Manager implements ActionListener
         addProducsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addProducsFrame.setVisible(true);
         addProducsFrame.add(addProductsPanel);
+        addTaskFrame.setLocationRelativeTo(null);
         //
         addProductsPanel.setLayout(null);
         //
@@ -100,6 +107,7 @@ public class Manager implements ActionListener
         addTaskFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addTaskFrame.setVisible(true);
         addTaskFrame.add(addTaskPanel);
+        addTaskFrame.setLocationRelativeTo(null);
         //
         addTaskPanel.setLayout(null);
         //
@@ -147,7 +155,7 @@ public class Manager implements ActionListener
 
         showInventoryFrame.setVisible(true);
         showInventoryFrame.setSize(400,400);
-
+        showInventoryFrame.setLocationRelativeTo(null);
         showInventoryFrame.add(scroll);
 
         inventoryLabel.setLineWrap(true);

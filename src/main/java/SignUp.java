@@ -2,6 +2,7 @@ import jdk.nashorn.internal.scripts.JO;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -17,9 +18,9 @@ public class SignUp implements ActionListener
     protected JPanel adminPanel = new JPanel();
     protected JLabel passwordLabel = new JLabel("Password:");
     protected JPasswordField passwordField = new JPasswordField();
-    protected JButton connectAdminButton = new JButton("Connect Admin");
+    protected JButton connectAdminButton = new RoundButton("Connect Admin");
     //
-    protected JButton backButton = new JButton("Back");
+    protected JButton backButton = new RoundButton("Back");
     ///
     ///
     protected JLabel usernameSignUpLabel = new JLabel("username");
@@ -27,7 +28,7 @@ public class SignUp implements ActionListener
     ///
     protected JTextField usernameTextSU = new JTextField();
     protected JPasswordField passwordTextSU = new JPasswordField();
-    protected JButton createAccount= new JButton("Create account");
+    protected JButton createAccount= new RoundButton("Create account");
     protected JCheckBox employeeCheckBox = new JCheckBox("Employee");
     protected JCheckBox managerCheckBox = new JCheckBox("Manager");
     public void performAdmin() {
@@ -35,19 +36,21 @@ public class SignUp implements ActionListener
         adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         adminFrame.setVisible(true);
         adminFrame.add(adminPanel);
+        adminFrame.setLocationRelativeTo(null);
         adminPanel.setLayout(null);
         //Label
         passwordLabel.setBounds(10,20,140,130);
         adminPanel.add(passwordLabel);
         //PasswordField
-        passwordField.setBounds(10,90,140,35);
+        passwordField.setBounds(10,100,140,35);
         adminPanel.add(passwordField);
+        adminPanel.setBackground(new Color(135,72,72));
         //Connect
-        connectAdminButton.setBounds(10,160,160,35);
+        connectAdminButton.setBounds(10,160,160,55);
         connectAdminButton.addActionListener(this);
         adminPanel.add(connectAdminButton);
         //Back Button
-        backButton.setBounds(180,160,90,35);
+        backButton.setBounds(180,160,90,55);
         backButton.addActionListener(this);
         adminPanel.add(backButton);
     }
@@ -58,6 +61,8 @@ public class SignUp implements ActionListener
         signUpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         signUpFrame.add(signUpPanel);
         signUpPanel.setLayout(null);
+        signUpFrame.setLocationRelativeTo(null);
+        signUpPanel.setBackground(new Color(135,72,72));
         //username Label
         usernameSignUpLabel.setBounds(10,10,110,100);
         signUpPanel.add(usernameSignUpLabel);
@@ -73,15 +78,17 @@ public class SignUp implements ActionListener
         //Employee check box
         employeeCheckBox.setBounds(10,180,100,35);
         signUpPanel.add(employeeCheckBox);
+        employeeCheckBox.setBackground(new Color(135,72,72));
         //Manager Check box
         managerCheckBox.setBounds(130,180,100,35);
         signUpPanel.add(managerCheckBox);
+        managerCheckBox.setBackground(new Color(135,72,72));
         //connect Button
-        createAccount.setBounds(100,240,160,35);
+        createAccount.setBounds(60,240,160,55);
         createAccount.addActionListener(this);
         signUpPanel.add(createAccount);
         //backbutton
-        backButton.setBounds(280,240,90,35);
+        backButton.setBounds(280,240,90,55);
         backButton.addActionListener(this);
         signUpPanel.add(backButton);
     }
