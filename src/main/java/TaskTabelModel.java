@@ -3,9 +3,10 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
 public class TaskTabelModel extends DefaultTableModel {
-
-    public TaskTabelModel() {
+     String user;
+    public TaskTabelModel(String name) {
         super(new String[]{"nr mat","TASK DESCRIPTION","REALIZED"}, 0);
+        user=name;
     }
 
     @Override
@@ -33,7 +34,12 @@ public class TaskTabelModel extends DefaultTableModel {
            // System.out.println(aValue);
             if(aValue.equals(true))
             {
-                System.out.println(aValue);
+               // System.out.println(aValue);
+                String task = (String)this.getValueAt(row,1);
+                //System.out.println(task);
+                Employee employee = new Employee(user);
+                employee.deleteTasks(task);
+
             }
             Vector rowData = (Vector)getDataVector().get(row);
             rowData.set(2, (boolean)aValue);

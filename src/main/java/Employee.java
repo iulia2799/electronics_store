@@ -22,6 +22,7 @@ public class Employee implements ActionListener{
     {
         this.username = username;
     }
+    public String getUsername(){return username;}
     public void performViewProducts()
     {
         final JFrame viewProductsFrame = new JFrame();
@@ -56,7 +57,7 @@ public class Employee implements ActionListener{
 
 
 
-        TaskTabelModel model = new TaskTabelModel();
+        TaskTabelModel model = new TaskTabelModel(username);
         JTable table = new JTable(model);
 
 // Create a couple of columns
@@ -83,7 +84,12 @@ public class Employee implements ActionListener{
         taskFrame.setResizable(true);
 
     }
+    public void deleteTasks(String task)
+    {
+        AddTasks DEL = new AddTasks();
+        DEL.deleteTask(task,this.getUsername());
 
+    }
     public void performEmployee(String username)
     {
         employeeFrame.setVisible(true);
