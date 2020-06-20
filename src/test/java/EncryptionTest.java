@@ -3,6 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.security.NoSuchAlgorithmException;
 
 import static org.junit.Assert.*;
 
@@ -19,5 +20,12 @@ public class EncryptionTest {
 
     @Test
     public void encodePassword() {
+        Encryption encryption = new Encryption();
+        String pass = "pacala89";
+        try {
+            assertEquals("corect",encryption.encodePassword(pass),encryption.encodePassword(pass));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 }

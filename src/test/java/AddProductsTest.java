@@ -24,5 +24,9 @@ public class AddProductsTest {
 
     @Test
     public void addProduct() {
+       // AddProducts addproduct = new AddProducts();
+        //addproduct.addProduct("rocky",50,5);
+
+
     }
 }

@@ -7,6 +7,9 @@ public class AddTasksTest {
 
     @Test
     public void addTask() {
+        AddTasks addTasks = new AddTasks();
+        addTasks.addTask("rocky","rocky");
+        assertNotNull("result",addTasks);
     }
 
     @Test

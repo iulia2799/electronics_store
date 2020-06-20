@@ -15,5 +15,8 @@ public class EmployeeTest {
 
     @Test
     public void deleteTasks() {
+        Employee employee = new Employee("rocky");
+        employee.deleteTasks("rocky");
+        assertNotNull(employee);
     }
 }
