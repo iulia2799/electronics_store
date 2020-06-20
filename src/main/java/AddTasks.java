@@ -33,7 +33,8 @@ public class AddTasks {
             users.put("nameOfEmployee", nameOfEmployee);
             users.put("tasksList:", taskslist);
             arrayToParse.add(users);
-        }
+        }///////////
+
         else {
             Iterator<JSONObject> jObject = arrayToParse.iterator();
             while (jObject.hasNext()) {
@@ -107,5 +108,44 @@ public class AddTasks {
 
         return tasks;
     }
+    public void deleteTask(String task,String nameOfEmployee){
+        String tasktoDel="";
+        JSONParser parser = new JSONParser();
+        JSONObject compare = new JSONObject();
+        Object p;
+        JSONArray array = new JSONArray();
+        try
+        {
+            FileReader readFile= new FileReader("tasks.json");
+            BufferedReader read = new BufferedReader(readFile);
+            p=parser.parse(read);
+            if(p instanceof JSONArray) {
+                array = (JSONArray) p;
+            }
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+        } catch (IOException ioException){
+            ioException.printStackTrace();
+        }
+        Iterator<JSONObject> iterator = array.iterator();
+        while(iterator.hasNext()) {
+            JSONObject obj = iterator.next();
+            if(obj.get("nameOfEmployee").equals(nameOfEmployee))
+            {
+               Object J = obj.get("tasksList:");
 
+              JSONArray list = new JSONArray();
+               if(J instanceof JSONArray)
+                 list= (JSONArray) J;
+              // Iterator<JSONArray> IT = list.iterator();
+                //System.out.println(list);
+                list.remove(task);
+               // System.out.println(list);
+                obj.remove("tasksList:");
+                obj.put("tasksList:",list);
+            }
+
+
+        }
+    }
 }

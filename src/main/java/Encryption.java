@@ -1,4 +1,3 @@
-import com.sun.org.apache.xml.internal.security.algorithms.MessageDigestAlgorithm;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

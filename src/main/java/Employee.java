@@ -22,6 +22,7 @@ public class Employee implements ActionListener{
     {
         this.username = username;
     }
+    public String getUsername(){return username;}
     public void performViewProducts()
     {
         final JFrame viewProductsFrame = new JFrame();
@@ -31,6 +32,7 @@ public class Employee implements ActionListener{
         viewProductsFrame.setVisible(true);
         viewProductsFrame.setSize(400,400);
         viewProductsFrame.add(scroll);
+        viewProductsFrame.setLocationRelativeTo(null);
 
         viewProductsText.setLineWrap(true);
         viewProductsText.setWrapStyleWord(true);
@@ -48,13 +50,14 @@ public class Employee implements ActionListener{
 
         taskFrame.setVisible(true);
         taskFrame.setSize(500,500);
+        taskFrame.setLocationRelativeTo(null);
        // taskFrame.add(scrollTasks);
         //taskFrame.add(taskPanel);
         taskPanel.setSize(400,400);
 
 
 
-        TaskTabelModel model = new TaskTabelModel();
+        TaskTabelModel model = new TaskTabelModel(username);
         JTable table = new JTable(model);
 
 // Create a couple of columns
@@ -72,8 +75,6 @@ public class Employee implements ActionListener{
        }
 
 
-
-
         taskFrame.add(new JScrollPane(table));
         //taskPanel.add(table);
         //table.getCellEditor();
@@ -83,26 +84,34 @@ public class Employee implements ActionListener{
         taskFrame.setResizable(true);
 
     }
+    public void deleteTasks(String task)
+    {
+        AddTasks DEL = new AddTasks();
+        DEL.deleteTask(task,this.getUsername());
 
+    }
     public void performEmployee(String username)
     {
         employeeFrame.setVisible(true);
         employeeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         employeeFrame.setSize(500,350);
         employeeFrame.add(employeePanel);
+        employeeFrame.setLocationRelativeTo(null);
         employeePanel.setLayout(null);
 
         employeePanel.setSize(500,350);
-
+        employeePanel.setBackground(new Color(135,72,72));
         viewProductsButton.setBounds(100,20,200,35);
         employeePanel.add(viewProductsButton);
         viewProductsButton.addActionListener(this);
+        viewProductsButton.setBackground(new Color(104,135,225));
 
         viewTasksButton.setBounds(100,100,200,35);
         employeePanel.add(viewTasksButton);
         viewTasksButton.addActionListener(this);
-
+        viewTasksButton.setBackground(new Color(104,135,225));
         backButton.setBounds(150,180,100,35);
+        backButton.setBackground(new Color(104,135,105));
         employeePanel.add(backButton);
         backButton.addActionListener(this);
 
